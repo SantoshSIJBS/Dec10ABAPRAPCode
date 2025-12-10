@@ -1,0 +1,10 @@
+@EndUserText.label: 'Service Definition for travel processor'
+define service ZI_RM_TRAVEL_PROCESSOR {
+  expose ZI_RM_I_M_TRAVEL_PROCESSOR  as Travel;
+  expose ZI_RM_I_M_BOOKING_PROCESSOR as Booking;
+  expose /DMO/I_Connection           as Connection;
+  expose /DMO/I_Carrier              as Carrier;
+  expose /DMO/I_Flight               as Flight;
+  expose ZI_Agency_U_FL              as Agency;
+  expose ZI_Customer_U_FL            as Customer;
+}

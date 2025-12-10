@@ -1,0 +1,9 @@
+@EndUserText.label: 'Flight Travel'
+define service ZI_FL_U_TRAVEL {
+  expose ZI_Agency_U_FL          as Agency;
+  expose ZI_Customer_U_FL        as Customer;
+  expose ZI_TRAVEL_U_FLIGHT      as Travel;
+  expose I_Country               as Country;
+  expose I_Currency              as Currency;
+  expose /DMO/I_Travel_Status_VH as TravelStatus;
+}

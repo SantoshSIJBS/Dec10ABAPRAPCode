@@ -1,0 +1,103 @@
+@Metadata.layer: #CORE
+@UI.headerInfo : { 
+    typeName : 'Travel',
+    typeNamePlural : 'Travels',
+    description: { value : 'TotalPrice' },
+    title : { value: 'Description' }
+}
+
+@UI.presentationVariant: [{ sortOrder: [{ by: 'TravelId', direction: #ASC }] }]
+@Search.searchable: true
+annotate view ZI_TRAVEL_U_FLIGHT
+    with 
+{
+    @UI.facet: [
+    { 
+        label: 'General Information',
+        position: 10,
+        id: 'GeneralInfo',
+        type: #COLLECTION
+    },
+    { 
+            id: 'Travel',
+            purpose: #STANDARD,
+            type : #IDENTIFICATION_REFERENCE,
+            label : 'Travel Information',
+            position: 10,
+            parentId: 'GeneralInfo'
+     },
+     { 
+        purpose: #HEADER,
+        type: #DATAPOINT_REFERENCE,
+        position: 10,
+        label: 'Travel Details',
+        targetQualifier: 'StatusData'
+     },
+     { 
+        purpose: #STANDARD,
+        type: #FIELDGROUP_REFERENCE,
+        label : 'Price',
+        parentId : 'GeneralInfo',
+        position: 20,
+        targetQualifier: 'PriceData'
+     },
+     { 
+        purpose: #STANDARD,
+        type: #FIELDGROUP_REFERENCE,
+        label : 'Dates',
+        parentId : 'GeneralInfo',
+        position: 30,
+        targetQualifier: 'DatesData'
+     }]
+    @UI.selectionField: [{ position : 10  }]
+    @UI.lineItem: [{ position : 10 , label: 'Travel ID'}]
+    @UI.identification: [{ position : 10 }]
+    @Consumption.valueHelpDefinition: [{ entity : { name: 'ZI_TRAVEL_U_FLIGHT', element: 'TravelId' } }]
+    @Search.defaultSearchElement: true
+    TravelId;
+    @UI.selectionField: [{ position : 20  }]
+    @UI.lineItem: [{ position : 20, label: 'Agency ID' }]
+    @UI.identification: [{ position : 20 }]
+    @Consumption.valueHelpDefinition: [{ entity : { name: 'ZI_Agency_U_FL', element: 'AgencyId' } }]
+    @Search.defaultSearchElement: true
+    AgencyId;
+    @UI.selectionField: [{ position : 30  }]
+    @UI.lineItem: [{ position : 30, label: 'Customer ID' }]
+    @UI.identification: [{ position : 30 }]
+    @Consumption.valueHelpDefinition: [{ entity : { name: 'ZI_Customer_U_FL', element: 'CustomerId' } }]
+    @Search.defaultSearchElement: true
+    CustomerId;
+    
+    @UI.lineItem: [{ position : 40 }]
+    //@UI.identification: [{ position : 40 }]
+    @UI.fieldGroup: [{ qualifier: 'DatesData', position: 30 }]
+    BeginDate;
+    //@UI.identification: [{ position : 50 }]
+    @UI.fieldGroup: [{ qualifier: 'DatesData', position: 30 }]
+    EndDate;
+    //@UI.identification: [{ position : 60 }]
+    @UI.fieldGroup: [{ qualifier: 'PriceData', position: 20 }]
+    BookingFee;
+    @UI.lineItem: [{ position : 50 }]
+    //@UI.identification: [{ position : 70 }]
+    @UI.fieldGroup: [{ qualifier: 'PriceData', position: 20 }]
+    TotalPrice;
+    @UI.lineItem: [{ position : 60 }]
+    //@UI.identification: [{ position : 80 }]
+    @UI.fieldGroup: [{ qualifier: 'PriceData', position: 20 }]
+    CurrencyCode;
+    // @UI.lineItem: [{ position : 70 }]
+    @UI.identification: [{ position : 90 }]
+    Description;
+    @UI.textArrangement: #TEXT_ONLY
+    @UI.lineItem: [{ position : 80, criticality: 'Criticality', criticalityRepresentation: #WITH_ICON, importance: #HIGH},
+                    { type: #FOR_ACTION, dataAction: 'set_status_booked', label: 'Booked'}]
+    @UI.identification: [{ position : 100 }]
+    @UI.dataPoint: { qualifier: 'StatusData', title: 'Status', criticality: 'Criticality' }
+    Status;
+//    CreatedBy;
+ //   CreatedAt;
+ //   LastChangedBy;
+//    LastChangedAt;
+
+}
